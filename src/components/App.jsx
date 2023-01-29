@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ContactList } from './Phonebook/ContactList'
 import { ContactForm } from './Phonebook/ContactForm'
 import { Filter } from './Phonebook/Filter'
@@ -6,9 +6,14 @@ import styles from './Phonebook/Phonebook.module.css'
 
 
 export function App(){
-  const [contacts, setContacts] = useState([])
+  const [contacts, setContacts] = useState(JSON.parse(localStorage.getItem('contacts')) ?? [])
   const [filter, setFilter] = useState('')
 
+
+  useEffect(() => {
+    localStorage.setItem('contacts', JSON.stringify(contacts))
+
+  }, [contacts])
 
   function hendleSubmit (name, number) {
     if (contacts.find(contact => contact.name.toLowerCase() === name.toLowerCase())) {
