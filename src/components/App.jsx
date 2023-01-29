@@ -12,7 +12,6 @@ export function App(){
 
   useEffect(() => {
     localStorage.setItem('contacts', JSON.stringify(contacts))
-
   }, [contacts])
 
   function hendleSubmit (name, number) {
